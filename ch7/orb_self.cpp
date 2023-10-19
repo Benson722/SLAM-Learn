@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
   vector<DescType> descriptor_2;
 
   // 进行特征提取
+  chrono::steady_clock::time_point t1 = chrono::steady_clock::now();
   cv::FAST(first_image, keypoints_1, 40);
   cout << "第一幅图像FAST特征提取完成" << endl;
   ComputeORB(first_image, keypoints_1, descriptor_1);
@@ -35,9 +36,18 @@ int main(int argc, char *argv[]) {
   cout << "第二幅图像FAST特征提取完成" << endl;
   ComputeORB(second_image, keypoints_2, descriptor_2);
   cout << "第二幅图像ORB特征计算完成" << endl;
+  chrono::steady_clock::time_point t2 = chrono::steady_clock::now();
+  chrono::duration<double> time_used =
+      chrono::duration_cast<chrono::duration<double>>(t2 - t1);
+  cout << "Extract ORB cost = " << time_used.count() << " seconds. " << endl;
+
   // 进行匹配
   vector<cv::DMatch> matches;
+  t1 = chrono::steady_clock::now();
   BfMatch(descriptor_1, descriptor_2, matches);
+  t2 = chrono::steady_clock::now();
+  time_used = chrono::duration_cast<chrono::duration<double>>(t2 - t1);
+  cout << "Match ORB cost = " << time_used.count() << " seconds. " << endl;
 
   cv::Mat image_show;
 
