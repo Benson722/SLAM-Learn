@@ -8,7 +8,7 @@
 
 using namespace cv;
 
-void decomposeEssentialMat( InputArray _E, OutputArray _R1, OutputArray _R2, OutputArray _t );
+void extra_decomposeEssentialMat( InputArray _E, OutputArray _R1, OutputArray _R2, OutputArray _t );
 
 int recoverPose( InputArray E, InputArray _points1, InputArray _points2, OutputArray _R,
                      OutputArray _t, double focal, Point2d pp=Point2d(0, 0), InputOutputArray _mask=noArray());

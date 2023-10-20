@@ -2,7 +2,7 @@
 #include <iostream>
 using  namespace std;
 
-void decomposeEssentialMat( InputArray _E, OutputArray _R1, OutputArray _R2, OutputArray _t )
+void extra_decomposeEssentialMat( InputArray _E, OutputArray _R1, OutputArray _R2, OutputArray _t )
 {
     Mat E = _E.getMat().reshape(1, 3);
     CV_Assert(E.cols == 3 && E.rows == 3);
@@ -60,7 +60,7 @@ int recoverPose( InputArray E, InputArray _points1, InputArray _points2, OutputA
     points2 = points2.t();
 
     Mat R1, R2, t;
-    decomposeEssentialMat(E, R1, R2, t);
+    extra_decomposeEssentialMat(E, R1, R2, t);
     Mat P0 = Mat::eye(3, 4, R1.type());
     Mat P1(3, 4, R1.type()), P2(3, 4, R1.type()), P3(3, 4, R1.type()), P4(3, 4, R1.type());
     P1(Range::all(), Range(0, 3)) = R1 * 1.0; P1.col(3) = t * 1.0;
