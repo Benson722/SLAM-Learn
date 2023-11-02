@@ -1,5 +1,7 @@
 cmake_minimum_required( VERSION 2.8 )
+# Cmake最低版本，如果加入“FATAL_ERROR”，将发出致命错误。
 project( vo1 )
+
 
 set( CMAKE_BUILD_TYPE "Release" )
 set( CMAKE_CXX_FLAGS "-std=c++11 -O3" )
@@ -12,6 +14,9 @@ find_package( OpenCV 3.1 REQUIRED )
 # find_package( OpenCV REQUIRED ) # use this if in OpenCV2 
 find_package( G2O REQUIRED )
 find_package( CSparse REQUIRED )
+
+# Eigen 使用：find_package / include_dir.. ? list
+# link problem?
 
 include_directories( 
     ${OpenCV_INCLUDE_DIRS} 
