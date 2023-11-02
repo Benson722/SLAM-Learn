@@ -13,10 +13,11 @@
 
 // 获得特征点和匹配子
 void find_feature_matches_hand(
-    const std::vector<Eigen::Vector3d>& points_3d,
-    const std::vector<Eigen::Vector2d>& points_2d,
-    const cv::Mat &K,
-    Sophus::SE3d &poses
+    const cv::Mat& img_1,
+    const cv::Mat& img_2,
+    std::vector<cv::KeyPoint>& keypoints_1,
+    std::vector<cv::KeyPoint>& keypoints_2,
+    std::vector<cv::DMatch>& matches
 );
 
 // 手写高斯牛顿法迭代求解PnP
@@ -92,8 +93,9 @@ void find_feature_matches_hand(const cv::Mat& img_1, const cv::Mat& img_2,
         if (dist < min_dist) min_dist = dist;
         if (dist > max_dist) max_dist = dist;
     }
-    printf("---Max dist is %f\n", max_dist);
-    printf("---Min dist is %f\n", min_dist);
+
+    std::cout << "---Max dist is " << max_dist <<std::endl;
+    std::cout << "---Min dist is " << min_dist <<std::endl;
 
     // 当描述子之间的距离大于2倍的min_dist时，
     // 认为是误匹配，min_dist的值不小于30.0（工程值）
